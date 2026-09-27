@@ -14,6 +14,7 @@ const Equip = () => import('@/views/equip/index.vue')
 const Pump = () => import('@/views/pump/index.vue')
 const Power = () => import('@/views/power/index.vue')
 const Pipe = () => import('@/views/pipe/index.vue')
+const PipeDetail = () => import('@/views/pipe/detail.vue')
 const Lift = () => import('@/views/lift/index.vue')
 const Meter = () => import('@/views/meter/index.vue')
 const Dispatch2 = () => import('@/views/dispatch2/index.vue')
@@ -39,6 +40,7 @@ const router = createRouter({
     { path: '/pump', name: 'pump', component: Pump },
     { path: '/power', name: 'power', component: Power },
     { path: '/pipe', name: 'pipe', component: Pipe },
+    { path: '/pipe/:id', name: 'pipe-detail', component: PipeDetail },
     { path: '/lift', name: 'lift', component: Lift },
     { path: '/meter', name: 'meter', component: Meter },
     { path: '/dispatch2', name: 'dispatch2', component: Dispatch2 },

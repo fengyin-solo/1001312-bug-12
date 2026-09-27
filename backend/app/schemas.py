@@ -19,6 +19,7 @@ class ActionResult(BaseModel):
     ok: bool
     message: str
     entry: dict[str, Any] | None = None
+    blocked: list[str] = Field(default_factory=list)  # 被阻断的巡查编号
 
 
 class EntryPayload(BaseModel):
@@ -26,6 +27,29 @@ class EntryPayload(BaseModel):
 
     values: dict[str, Any] = Field(default_factory=dict)
     remark: str | None = None
+
+
+class PipeListResult(BaseModel):
+    """管网巡查列表：分段计数与数据一起返回，列表、详情、弹窗口径一致。"""
+
+    items: list[dict[str, Any]]
+    total: int
+    page: int = 1
+    size: int = 20
+    stage_counts: dict[str, int] = Field(default_factory=dict)
+
+
+class BackfillPayload(BaseModel):
+    """批量补录管网巡查：每条独立校验，失败的条目可单独重试。"""
+
+    entries: list[dict[str, Any]] = Field(default_factory=list)
+
+
+class BackfillResult(BaseModel):
+    ok: bool
+    message: str
+    created: list[dict[str, Any]] = Field(default_factory=list)
+    blocked: list[dict[str, Any]] = Field(default_factory=list)
 
 
 
