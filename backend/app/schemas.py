@@ -19,6 +19,24 @@ class ActionResult(BaseModel):
     ok: bool
     message: str
     entry: dict[str, Any] | None = None
+    blocked: list[str] = Field(default_factory=list)
+
+
+class SupplementaryItemResult(BaseModel):
+    """批量补录里单条记录的结果：与请求里的顺序一一对应，失败的可单独重试。"""
+
+    ok: bool
+    code: str
+    reason: str = ""
+    entry: dict[str, Any] | None = None
+
+
+class SupplementaryResult(BaseModel):
+    """批量补录结果：成功与失败分开，被阻断的巡查编号在 message 里一并列出。"""
+
+    ok: bool
+    message: str
+    results: list[SupplementaryItemResult] = Field(default_factory=list)
 
 
 class EntryPayload(BaseModel):
